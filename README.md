@@ -1,2 +1,3 @@
 # PiRobot-car-server
-Server for android app to control a robot car over raspberry pi
+Node js server for [android app](https://github.com/mkovacek07/PiRobot-car-andriod-app/blob/master/README.md) to control a robot car over raspberry pi.
+
