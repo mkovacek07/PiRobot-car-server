@@ -1,0 +1,14 @@
+{
+
+  "dependencies": {
+    "express": "^4.15.2",
+    "ip": "^1.1.5",
+    "serialport": "^6.0.4",
+    "socket.io": "^1.7.3",
+    "johnny-five": "~0.8.14",
+    "express": "4.x",
+    "ejs": "^1.0.0",
+    "raspi-io": "^8.1.0",
+    "python-shell": "^0.4.0"
+  }
+}

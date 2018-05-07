@@ -1,0 +1,70 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+  <style>
+    body {
+      overflow : hidden;
+      padding : 0;
+      margin : 0;
+      background-color : #BBB;
+    }
+    #container {
+      width : 100%;
+      height : 100%;
+      overflow : hidden;
+      padding : 0;
+      margin : 0;
+      -webkit-user-select : none;
+      -moz-user-select : none;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
+  <title>Joystick</title>
+</head>
+<body>
+
+<div id="container"></div>
+
+<script src='virtualjoystick.js'></script>
+<script>
+  var socket = io.connect('http://192.168.43.183:8080');
+
+  var joystick  = new VirtualJoystick({
+    container : document.getElementById('container'),
+    mouseSupport : true
+  });
+  
+  socket.on("connection" , function (data) {
+        console.log(data);
+    });
+
+  function step(timestamp) {
+    if( joystick.up() ) {
+      socket.emit('message',"forward");
+    }
+
+    if( joystick.down() ) {
+      socket.emit('message',"backward");
+    }
+
+    if( joystick.right() ) {
+      socket.emit('message',"right");
+    } 
+
+    if( joystick.left() ) {
+      socket.emit('message',"left");
+    } 
+	
+    if( joystick.deltaX() == 0 && joystick.deltaY() == 0 ) {
+      socket.emit('message',"stop");
+    }
+
+    requestAnimationFrame(step);
+  }
+
+  requestAnimationFrame(step);
+</script>
+</body>
+</html>
